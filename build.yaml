@@ -1,0 +1,11 @@
+targets:
+  $default:
+    builders:
+      auto_route_generator|auto_router_generator:
+        generate_for:
+          include:
+            - lib/**.dart
+      injectable_generator|injectable_builder:
+        generate_for:
+          include:
+            - lib/**.dart 
