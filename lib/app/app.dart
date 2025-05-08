@@ -38,7 +38,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
   void didChangePlatformBrightness() {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     if (themeProvider.themeMode == ThemeMode.system) {
-      themeProvider.notifyListeners();
+      themeProvider.setSystemTheme();
     }
   }
 

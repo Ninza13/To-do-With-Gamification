@@ -4,7 +4,6 @@ import 'package:provider/provider.dart' as base;
 import 'package:to_do_app/app/components/default_app_bar.dart';
 import 'package:to_do_app/app/provider/badge_provider.dart';
 import 'package:to_do_app/app/provider/todo_provider.dart';
-import 'package:to_do_app/app/router/router.gr.dart';
 import 'package:to_do_app/common/colors.dart';
 import 'package:to_do_app/ui/constants/images.dart';
 
