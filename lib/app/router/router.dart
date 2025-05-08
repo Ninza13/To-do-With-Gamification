@@ -10,29 +10,96 @@ class AppRouter extends RootStackRouter {
 
   @override
   List<AutoRoute> get routes => [
-    InstantRoute(page: SplashRoute.page, keepHistory: false, initial: true),
-    InstantRoute(page: OnboardingOneRoute.page, keepHistory: false),
-    InstantRoute(page: OnboardingRoute.page, keepHistory: false),
-    InstantRoute(page: OnboardingTwoRoute.page, keepHistory: false),
+    InstantRoute(
+      page: AuthWrapperRoute.page,
+      keepHistory: false,
+      initial: false,
+      children: [
+        InstantRoute(page: SplashRoute.page, keepHistory: false, initial: true),
+        InstantRoute(page: OnboardingRoute.page, keepHistory: false),
+      ],
+    ),
+
     // Inside
     InstantRoute(
-      initial: false,
+      initial: true,
       page: MainWrapperRoute.page,
       keepHistory: false,
       children: [
-        InstantRoute(initial: true, page: HomeRoute.page, keepHistory: false),
-        InstantRoute(page: BadgeRoute.page, keepHistory: false),
-        InstantRoute(page: ShopRoute.page, keepHistory: false),
-
         InstantRoute(
-          initial: false,
-          page: SettingsRoute.page,
+          initial: true,
+          page: HomeWrapperRoute.page,
           keepHistory: false,
+          children: [
+            InstantRoute(
+              initial: true,
+              page: HomeRoute.page,
+              keepHistory: false,
+            ),
+
+            InstantRoute(
+              page: TaskCreateWrapperRoute.page,
+              keepHistory: false,
+              children: [
+                InstantRoute(
+                  initial: true,
+                  page: TaskCreatetionRoute.page,
+                  keepHistory: false,
+                ),
+              ],
+            ),
+          ],
+        ),
+        // Shop
+        InstantRoute(
+          page: ShopWrapperRoute.page,
+          keepHistory: false,
+          children: [
+            InstantRoute(
+              initial: true,
+              page: ShopRoute.page,
+              keepHistory: false,
+            ),
+          ],
         ),
 
-        InstantRoute(page: ProfileRoute.page, keepHistory: false),
+        // Task create
+        InstantRoute(
+          page: TaskCreateWrapperRoute.page,
+          keepHistory: false,
+          children: [
+            InstantRoute(
+              initial: true,
+              page: TaskCreatetionRoute.page,
+              keepHistory: false,
+            ),
+          ],
+        ),
+        // Badge route
+        InstantRoute(
+          page: BadgeWrapperRoute.page,
+          keepHistory: false,
+          children: [
+            InstantRoute(
+              initial: true,
+              page: BadgeRoute.page,
+              keepHistory: false,
+            ),
+          ],
+        ),
 
-        InstantRoute(page: TaskCreatetionRoute.page, keepHistory: false),
+        // Profile route
+        InstantRoute(
+          page: ProfileWrapperRoute.page,
+          keepHistory: false,
+          children: [
+            InstantRoute(
+              initial: true,
+              page: ProfileRoute.page,
+              keepHistory: false,
+            ),
+          ],
+        ),
       ],
     ),
   ];

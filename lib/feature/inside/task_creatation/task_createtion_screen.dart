@@ -45,15 +45,7 @@ class _TaskCreatetionScreenState extends State<TaskCreatetionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 60),
-              Text(
-                widget.todo == null ? 'Create New Task' : 'Update Task',
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               Form(
                 key: _formKey,
                 child: Column(
@@ -126,33 +118,46 @@ class _TaskCreatetionScreenState extends State<TaskCreatetionScreen> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               padding: const EdgeInsets.symmetric(vertical: 14),
-                              backgroundColor: AppColors.black100,
+                              backgroundColor: AppColors.orange200,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                if (widget.todo == null) {
-                                  todoProvider.addTodo(
-                                    _titleController.text,
-                                    _descriptionController.text,
-                                  );
-                                } else {
-                                  todoProvider.updateTodo(
-                                    widget.todo!.copyWith(
-                                      title: _titleController.text,
-                                      description: _descriptionController.text,
-                                    ),
-                                  );
+                                final navigator = context.router;
+                                try {
+                                  if (widget.todo == null) {
+                                    await todoProvider.addTodo(
+                                      _titleController.text,
+                                      _descriptionController.text,
+                                    );
+                                  } else {
+                                    await todoProvider.updateTodo(
+                                      widget.todo!.copyWith(
+                                        title: _titleController.text,
+                                        description:
+                                            _descriptionController.text,
+                                      ),
+                                    );
+                                  }
+                                  if (mounted) {
+                                    navigator.back();
+                                  }
+                                } catch (e) {
+                                  if (mounted) {
+                                    // ignore: use_build_context_synchronously
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(content: Text('Error: $e')),
+                                    );
+                                  }
                                 }
-                                context.router.pop();
                               }
                             },
                             child: Text(
                               widget.todo == null ? 'Add Task' : 'Update Task',
                               style: const TextStyle(
-                                color: AppColors.gray100,
+                                color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),

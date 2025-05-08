@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as base;
+import 'package:to_do_app/app/components/default_app_bar.dart';
 import 'package:to_do_app/app/provider/badge_provider.dart';
 import 'package:to_do_app/app/provider/todo_provider.dart';
 import 'package:to_do_app/app/router/router.gr.dart';
@@ -14,18 +15,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              context.router.push(SettingsRoute());
-            },
-          ),
-        ],
-      ),
+      appBar: DefaultAppBar(title: 'Profile'),
       body: SingleChildScrollView(
         child: Column(
           children: [

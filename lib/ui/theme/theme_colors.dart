@@ -109,7 +109,7 @@ final class ThemeColors extends ThemeExtension<ThemeColors> {
   );
 
   static ThemeColors of(BuildContext context) {
-    return Theme.of(context).extension<ThemeColors>()!;
+    return Theme.of(context).extension<ThemeColors>() ?? ThemeColors.light;
   }
 
   @override

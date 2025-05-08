@@ -6,6 +6,7 @@ import 'package:to_do_app/app/models/todo.dart';
 import 'package:to_do_app/app/provider/badge_provider.dart';
 import 'package:to_do_app/app/provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter/material.dart';
 
 class TodoProvider extends BaseProvider {
   TodoProvider() {
@@ -104,9 +105,16 @@ class TodoProvider extends BaseProvider {
     try {
       final index = _todos.indexWhere((todo) => todo.id == id);
       if (index != -1) {
-        _todos[index] = _todos[index].copyWith(
-          isCompleted: !_todos[index].isCompleted,
-        );
+        final todo = _todos[index];
+        _todos[index] = todo.copyWith(isCompleted: !todo.isCompleted);
+
+        // Check achievements when a task is completed
+        if (_todos[index].isCompleted) {
+          final completedTasks =
+              _todos.where((todo) => todo.isCompleted).length;
+          context.read<BadgeProvider>().checkTaskAchievements(completedTasks);
+        }
+
         await _saveTodos();
         notifyListeners();
         await _checkBadges(context);

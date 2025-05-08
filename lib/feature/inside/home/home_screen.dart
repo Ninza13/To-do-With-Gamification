@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as base;
-import 'package:to_do_app/app/models/todo.dart';
+import 'package:to_do_app/app/components/default_app_bar.dart';
 import 'package:to_do_app/app/provider/todo_provider.dart';
 import 'package:to_do_app/app/router/router.gr.dart';
 import 'package:to_do_app/common/colors.dart';
-import 'package:to_do_app/feature/inside/task_creatation/task_createtion_screen.dart';
-import 'package:to_do_app/ui/constants/images.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -15,21 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Image.asset(AppImages.user.path, width: 40, height: 40),
-        title: const Text(
-          "Hi!, Welcome, Ziya",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              context.router.push(const SettingsRoute());
-            },
-          ),
-        ],
-      ),
+      appBar: DefaultAppBar(title: "Hi!, Welcome, Ziya"),
       body: base.Consumer<TodoProvider>(
         builder: (context, todoProvider, child) {
           final todos = todoProvider.todos;
@@ -108,7 +92,7 @@ class HomeScreen extends StatelessWidget {
                           color: AppColors.goldPrimary,
                         ),
                         onPressed: () {
-                          context.router.push(TaskCreatetionRoute(todo: todo));
+                          context.pushRoute(TaskCreatetionRoute(todo: todo));
                         },
                       ),
                       IconButton(

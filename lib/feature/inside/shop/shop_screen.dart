@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart' as base;
+import 'package:to_do_app/app/components/default_app_bar.dart';
 import 'package:to_do_app/app/provider/badge_provider.dart';
 import 'package:to_do_app/ui/constants/images.dart';
 
@@ -13,9 +14,8 @@ class ShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Image.asset(AppImages.user.path),
-        title: const Text('What can you buy it'),
+      appBar: DefaultAppBar(
+        title: 'What can you buy it',
         centerTitle: true,
         actions: [
           base.Consumer<BadgeProvider>(
@@ -31,6 +31,7 @@ class ShopScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
                   ],

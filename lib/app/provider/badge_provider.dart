@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:to_do_app/app/models/badge.dart' as app_badge;
 import 'package:to_do_app/app/models/todo.dart';
 import 'package:to_do_app/app/provider/provider.dart';
-import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/app/models/task_achievement.dart';
 
 class BadgeProvider extends BaseProvider {
   BadgeProvider() {
@@ -17,6 +15,59 @@ class BadgeProvider extends BaseProvider {
 
   int _crystals = 0;
   int get crystals => _crystals;
+
+  List<TaskAchievement> _taskAchievements = [
+    TaskAchievement(
+      title: 'Task Beginner',
+      description: 'Complete 5 tasks',
+      requiredTasks: 5,
+      rewardCrystals: 50,
+    ),
+    TaskAchievement(
+      title: 'Task Enthusiast',
+      description: 'Complete 10 tasks',
+      requiredTasks: 10,
+      rewardCrystals: 100,
+    ),
+    TaskAchievement(
+      title: 'Task Master',
+      description: 'Complete 20 tasks',
+      requiredTasks: 20,
+      rewardCrystals: 200,
+    ),
+    TaskAchievement(
+      title: 'Task Expert',
+      description: 'Complete 35 tasks',
+      requiredTasks: 35,
+      rewardCrystals: 350,
+    ),
+    TaskAchievement(
+      title: 'Task Legend',
+      description: 'Complete 50 tasks',
+      requiredTasks: 50,
+      rewardCrystals: 500,
+    ),
+    TaskAchievement(
+      title: 'Task Champion',
+      description: 'Complete 75 tasks',
+      requiredTasks: 75,
+      rewardCrystals: 750,
+    ),
+    TaskAchievement(
+      title: 'Task Hero',
+      description: 'Complete 100 tasks',
+      requiredTasks: 100,
+      rewardCrystals: 1000,
+    ),
+    TaskAchievement(
+      title: 'Task God',
+      description: 'Complete 150 tasks',
+      requiredTasks: 150,
+      rewardCrystals: 1500,
+    ),
+  ];
+
+  List<TaskAchievement> get taskAchievements => _taskAchievements;
 
   void addCrystals(int amount) {
     _crystals += amount;
@@ -186,6 +237,18 @@ class BadgeProvider extends BaseProvider {
     } catch (e) {
       print('Streak Master badge not found or error: $e');
     }
+  }
+
+  void checkTaskAchievements(int completedTasks) {
+    for (int i = 0; i < _taskAchievements.length; i++) {
+      final achievement = _taskAchievements[i];
+      if (!achievement.isCompleted &&
+          completedTasks >= achievement.requiredTasks) {
+        _taskAchievements[i] = achievement.copyWith(isCompleted: true);
+        addCrystals(achievement.rewardCrystals);
+      }
+    }
+    notifyListeners();
   }
 
   Future<void> spendCrystals(int amount) async {
