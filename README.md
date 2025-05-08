@@ -3,14 +3,42 @@
 A new Flutter project.
 
 ## Getting Started
+# 📝 ToDo App
 
-This project is a starting point for a Flutter application.
+This Flutter application is a clean and simple task management tool. Users can add, edit, mark as completed, and delete their tasks. The app uses modern Flutter packages such as `provider`, `auto_route`, and `localstorage` for state management and navigation.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- ✅ Add and edit tasks
+- 📅 Mark tasks as completed
+- 🗑️ Delete tasks
+- 🧭 Bottom navigation for tab switching
+- ⚙️ Settings page (expandable)
+- 🧠 State management using `provider`
+- 🔁 Navigation powered by `auto_route`
+- 💾 Local data persistence via `localstorage`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📁 Project Structure
+
+lib/
+├── app/
+│ ├── provider/ # State management (ToDoProvider)
+│ ├── router/ # auto_route configuration
+├── ui/
+│ ├── screens/ # Home, Profile, Settings, etc.
+│ ├── constants/ # Colors, images
+├── common/ # Shared colors, widgets
+
+
+
+## 📦 Dependencies
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  auto_route: ^7.8.4
+  localstorage: ^4.0.0+1
+  intl: ^0.18.1
+  collection: ^1.17.2
